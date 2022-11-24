@@ -1,12 +1,8 @@
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ImmunaLogo from "../Svgs/ImmunaLogo";
-import Profile from "../ProfileDropDownWithOptions/Profile";
-import Grid from "@mui/material/Unstable_Grid2";
 import ProfileDropDownWithOptions from "../ProfileDropDownWithOptions";
 
 const NavBar = () => {

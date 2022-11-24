@@ -19,6 +19,7 @@ import DaiIcon from "../../shared/Svgs/DaiIcon";
 import BinanceIcon from "../../shared/Svgs/BinanceIcon";
 import TetherIcon from "../../shared/Svgs/TetherIcon";
 import InchIcon from "../../shared/Svgs/InchIcon";
+import useToFetchCoinsList from "./useToFetchCoinsList";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -90,6 +91,7 @@ const balanceTableDummyData = [
 const BalanceTable = () => {
   const [open, setOpen] = useState(false);
   const setClose = () => setOpen(false);
+  const { coinsList } = useToFetchCoinsList();
 
   return (
     <Box>
@@ -123,14 +125,14 @@ const BalanceTable = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {balanceTableDummyData.map((item) => (
+            {coinsList.map((item) => (
               <BalanceTableRow
                 key={item.id}
                 setOpen={() => setOpen(true)}
-                riskStatus={item.riskStatus}
+                riskStatus={item.riskStatus!}
                 icon={item.icon}
-                balance={item.balance}
-                addr={item.addr}
+                balance={item.balance!}
+                addr={item.addr!}
               />
             ))}
           </TableBody>

@@ -1,31 +1,10 @@
-import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import React from "react";
 import Box from "@mui/material/Box";
-import MuiDrawer from "@mui/material/Drawer";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ViewComfyIcon from "@mui/icons-material/ViewComfy";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import SecurityIcon from "@mui/icons-material/Security";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import TextWithIcon from "../../components/shared/TextWithIcon";
-
-import DummyPersonProfile from "../../common/assets/images/dummy_person_profile.png";
-import ProfileDropDownWithOptions from "../../components/shared/ProfileDropDownWithOptions";
-import ImmunaLogo from "../../components/shared/Svgs/ImmunaLogo";
-import SearchInput from "../../components/shared/SearchInput";
-import CustomAppBar from "./CustomAppBar";
-import CustomDrawerHeader from "./CustomDrawerHeader";
-
-const drawerWidth = 268;
 
 const drawerNavigation = [
   { id: 1, Icon: ViewComfyIcon, text: "Dashboard" },
@@ -53,7 +32,7 @@ const DrawerNavigation = ({ open }: IProps) => {
       {drawerNavigation.map((item, index) => (
         <TextWithIcon
           key={item.id}
-          icon={<item.Icon />}
+          icon={<item.Icon fontSize="small" />}
           sx={{
             height: !open ? undefined : 48,
             width: !open ? undefined : 194,

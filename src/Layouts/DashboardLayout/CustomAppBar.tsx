@@ -65,9 +65,7 @@ const CustomAppBar = ({ open, handleDrawerOpen }: IProps) => {
           <MenuIcon />
         </IconButton>
 
-        <Typography variant="h6" component="div">
-          Dashboard
-        </Typography>
+        <Typography component="div">Dashboard</Typography>
 
         <Box ml={7} sx={{ display: { xs: "none", sm: "block" } }}>
           <SearchInput />

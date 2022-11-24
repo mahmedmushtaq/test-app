@@ -1,5 +1,5 @@
-import * as React from "react";
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import React from "react";
+import { styled, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import CustomAppBar from "./CustomAppBar";
