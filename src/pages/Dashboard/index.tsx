@@ -1,12 +1,12 @@
 import DashboardLayout from "../../Layouts/DashboardLayout";
 import { Box } from "@mui/material";
-import BalanceTable from "../../components/Dashboard/Main/BalanceTable";
+import MainScreen from "../../components/Dashboard/MainScreen";
 
 const Dashboard = () => {
   return (
     <DashboardLayout>
       <Box>
-        <BalanceTable />
+        <MainScreen />
       </Box>
     </DashboardLayout>
   );

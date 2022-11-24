@@ -1,10 +1,10 @@
-import { ReactNode, useCallback, useEffect, useState } from "react";
-import { atom, useRecoilState } from "recoil";
-import fetchBalance from "../../../common/api";
+import { useCallback, useEffect, useState } from "react";
+import fetchBalance from "../../../common/api/dashboard";
 import { allCoinsList, ICoinsList } from "../../../common/store";
 
 const coinSymbol = (symbol: string) => {
-  if (symbol === "usd+") return "USDC";
+  if (symbol === "eth") return "WETH";
+  else if (symbol === "usd+") return "USDC";
   return symbol.toUpperCase();
 };
 

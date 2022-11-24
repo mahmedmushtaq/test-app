@@ -4,7 +4,6 @@ interface IPoolBalanceResponse {
   id: string;
   symbol: string;
   name: string;
-  // I've considered it, pool balance. Confused about it. Contacted Mariano but he was not replying
   market_cap: string;
 }
 
