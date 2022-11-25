@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
@@ -8,7 +8,7 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
@@ -54,6 +54,15 @@ const StyledMenu = styled((props: MenuProps) => (
     },
   },
 }));
+
+const dataCountFilter = [
+  { value: -1, children: <ChevronLeftIcon /> },
+  { value: 1, children: 1 },
+  { value: 2, children: 2 },
+  { value: "...", children: "..." },
+  { value: 50, children: 50 },
+  { value: -2, children: <ChevronRightIcon /> },
+];
 
 const DataFilter = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -130,7 +139,7 @@ const DataFilter = () => {
           onChange={handleAlignment}
           sx={{
             height: 32,
-            p: 1,
+            py: 1,
             "& > button": {
               mx: 1,
               border: 0,
@@ -141,53 +150,19 @@ const DataFilter = () => {
             bgcolor: "common.white",
           }}
         >
-          <ToggleButton value="0" aria-label="left aligned">
-            <ChevronLeftIcon />
-          </ToggleButton>
-
-          <ToggleButton
-            style={{
-              background: alignment === "1" ? "#1D7DEA" : undefined,
-              color: alignment === "1" ? "white" : "black",
-            }}
-            value="1"
-            aria-label="left aligned"
-          >
-            1
-          </ToggleButton>
-          <ToggleButton
-            style={{
-              background: alignment === "2" ? "#1D7DEA" : undefined,
-              color: alignment === "2" ? "white" : "black",
-            }}
-            value="2"
-            aria-label="justified"
-          >
-            2
-          </ToggleButton>
-          <ToggleButton
-            style={{
-              background: alignment === "more" ? "#1D7DEA" : undefined,
-              color: alignment === "more" ? "white" : "black",
-            }}
-            value="more"
-            aria-label="justified"
-          >
-            ...
-          </ToggleButton>
-          <ToggleButton
-            style={{
-              background: alignment === "50" ? "#1D7DEA" : undefined,
-              color: alignment === "50" ? "white" : "black",
-            }}
-            value="50"
-            aria-label="justified"
-          >
-            50
-          </ToggleButton>
-          <ToggleButton value="0" aria-label="left aligned">
-            <ChevronRightIcon />
-          </ToggleButton>
+          {dataCountFilter.map((item) => (
+            <ToggleButton
+              style={{
+                background: alignment === item.value ? "#1D7DEA" : undefined,
+                color: alignment === item.value ? "white" : "black",
+              }}
+              key={item.value}
+              value={item.value}
+              aria-label="left aligned"
+            >
+              {item.children}
+            </ToggleButton>
+          ))}
         </ToggleButtonGroup>
       </Box>
     </>

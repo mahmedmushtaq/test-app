@@ -17,12 +17,13 @@ import CombineIcons from "../../shared/CombineIcons";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: "#fff",
-    color: theme.palette.common.black,
+    color: "#2C2C2C",
     fontWeight: 400,
     fontSize: 14,
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
+    color: "#272727",
   },
 }));
 
