@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
@@ -51,7 +51,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const DashboardLayout = ({ children }: IProps) => {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };

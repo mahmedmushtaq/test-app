@@ -24,14 +24,25 @@ const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
   },
 }));
 
-const BalanceTableFilter = () => {
-  const [alignment, setAlignment] = useState("addr");
+const toggleMenuOptions = [
+  {
+    value: "eth",
+    children: <TextWithIcon icon={<EthereumIcon />} text="Eth" />,
+  },
+  {
+    value: "addr",
+    children: <Typography>0xBAD7...E116</Typography>,
+  },
+];
 
-  const handleChange = (
+const BalanceTableFilter = () => {
+  const [selectedToggleMenu, setSelectedToggleMenu] = useState("addr");
+
+  const onChangeToggleMenu = (
     event: React.MouseEvent<HTMLElement>,
     newAlignment: string
   ) => {
-    setAlignment(newAlignment);
+    setSelectedToggleMenu(newAlignment);
   };
 
   return (
@@ -63,39 +74,31 @@ const BalanceTableFilter = () => {
         <Grid item sx={{ ml: 2, my: { xs: 1, md: 0 } }}>
           <StyledToggleButtonGroup
             size="small"
-            value={alignment}
+            value={selectedToggleMenu}
             exclusive
-            onChange={handleChange}
+            onChange={onChangeToggleMenu}
             aria-label="text alignment"
             sx={{ borderRadius: 22, background: "#E0EEFF" }}
           >
-            <ToggleButton
-              value="eth"
-              aria-label="left aligned"
-              style={{
-                background: alignment === "eth" ? "#CBE1FF" : "transparent",
-                borderRadius: 22,
-                paddingTop: 5,
-                paddingBottom: 5,
-              }}
-              sx={{ px: 2, height: 38, color: "#6C6C6C" }}
-            >
-              <TextWithIcon icon={<EthereumIcon />} text="Eth" />
-            </ToggleButton>
-
-            <ToggleButton
-              style={{
-                background: alignment === "addr" ? "#CBE1FF" : "transparent",
-                borderRadius: 22,
-                paddingTop: 5,
-                paddingBottom: 5,
-              }}
-              sx={{ px: 2, height: 38, color: "#383838", fontWeight: 400 }}
-              value="addr"
-              aria-label="justified"
-            >
-              <Typography>0xBAD7...E116</Typography>
-            </ToggleButton>
+            {toggleMenuOptions.map((menu) => (
+              <ToggleButton
+                value={menu.value}
+                aria-label="left aligned"
+                key={menu.value}
+                style={{
+                  background:
+                    selectedToggleMenu === menu.value
+                      ? "#CBE1FF"
+                      : "transparent",
+                  borderRadius: 22,
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                }}
+                sx={{ px: 2, height: 38, color: "#6C6C6C" }}
+              >
+                {menu.children}
+              </ToggleButton>
+            ))}
           </StyledToggleButtonGroup>
         </Grid>
         <Grid item>

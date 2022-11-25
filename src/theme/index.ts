@@ -5,10 +5,11 @@ let theme = createTheme({});
 theme = createTheme(theme, {
   palette: {
     common: {
-      lightBlack: "#5C5C5C"
+      lightBlack: "#5C5C5C",
     },
   },
   typography: {
+    fontFamily: ["Inter"].join(","),
     allVariants: {
       fontFamily: "'Inter'",
     },

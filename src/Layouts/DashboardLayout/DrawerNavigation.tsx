@@ -1,10 +1,11 @@
-import React from "react";
+
 import Box from "@mui/material/Box";
 import ViewComfyIcon from "@mui/icons-material/ViewComfy";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
 import SecurityIcon from "@mui/icons-material/Security";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import TextWithIcon from "../../components/shared/TextWithIcon";
+import { useState } from "react";
 
 const drawerNavigation = [
   { id: 1, Icon: ViewComfyIcon, text: "Dashboard" },
@@ -18,7 +19,7 @@ interface IProps {
 }
 
 const DrawerNavigation = ({ open }: IProps) => {
-  const [selectedNavigation, setSelectedNavigation] = React.useState(
+  const [selectedNavigation, setSelectedNavigation] = useState(
     drawerNavigation[0]
   );
 

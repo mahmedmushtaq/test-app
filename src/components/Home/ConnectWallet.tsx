@@ -3,18 +3,11 @@ import {
   Card,
   Typography,
   TextField,
-  styled,
   Button,
-  Grid,
 } from "@mui/material";
 import EthereumIcon from "../shared/Svgs/EthereumIcon";
 import TextWithIcon from "../shared/TextWithIcon";
-
-const Input = styled(TextField)(() => ({
-  "& fieldset": {
-    // borderRadius: "30px",
-  },
-}));
+import { Link } from "react-router-dom";
 
 const ConnectWallet = () => {
   return (
@@ -40,7 +33,7 @@ const ConnectWallet = () => {
           sx={{ mt: 1, mb: { xs: 2, xl: 2.5 } }}
           text="Ethereum"
         />
-        <Input
+        <TextField
           fullWidth
           placeholder="Enter Wallet Address"
           InputProps={{
@@ -48,19 +41,21 @@ const ConnectWallet = () => {
           }}
           inputProps={{ sx: { borderRadisu: 30 } }}
         />
-        <Button
-          variant="contained"
-          fullWidth
-          sx={{
-            height: 65,
-            borderRadius: 25,
-            mt: { xs: 4, xl: 7 },
-            fontSize: "1rem",
-            fontWeight: 500,
-          }}
-        >
-          Connect To Wallet
-        </Button>
+        <Link to="/dashboard" style={{ textDecoration: "none" }}>
+          <Button
+            variant="contained"
+            fullWidth
+            sx={{
+              height: 65,
+              borderRadius: 25,
+              mt: { xs: 4, xl: 7 },
+              fontSize: "1rem",
+              fontWeight: 500,
+            }}
+          >
+            Connect To Wallet
+          </Button>
+        </Link>
       </Box>
     </Card>
   );

@@ -12,8 +12,7 @@ import SearchFilter from "./BalanceTableFilter/SearchFilter";
 import BalanceTableRow from "./BalanceTableRow";
 import DataFilter from "./BalanceTableFilter/DataFilter";
 import RiskModal from "./RiskModal";
-import { useState } from "react";
-import useToFetchCoinsList from "./useToFetchCoinsList";
+import useToHandleData from "./useToHandleData";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -27,10 +26,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
+const balanceTableHeading = ["Protocol", "Pool", "Balance", "Risk Status"];
+
 const MainScreen = () => {
-  const [open, setOpen] = useState(false);
-  const setClose = () => setOpen(false);
-  const { coinsList } = useToFetchCoinsList();
+  const { coinsList, open, setClose, handleOpen } = useToHandleData();
 
   return (
     <Box>
@@ -45,29 +44,22 @@ const MainScreen = () => {
         <Table sx={{ minWidth: 900 }} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>
-                <TextWithIcon endIcon={<EthereumIcon />} text="Protocol" />
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                <TextWithIcon endIcon={<EthereumIcon />} text="Pool" />
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                <TextWithIcon
-                  endIcon={<EthereumIcon />}
-                  sx={{ mr: "auto" }}
-                  text="Balance"
-                />
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                <TextWithIcon endIcon={<EthereumIcon />} text="Risk Status" />
-              </StyledTableCell>
+              {balanceTableHeading.map((heading) => (
+                <StyledTableCell key={heading}>
+                  <TextWithIcon
+                    textStyle={{ fontSize: 14, fontFamily: "Inter" }}
+                    endIcon={<EthereumIcon />}
+                    text={heading}
+                  />
+                </StyledTableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {coinsList.map((item) => (
               <BalanceTableRow
                 key={item.id}
-                setOpen={() => setOpen(true)}
+                setOpen={handleOpen}
                 riskStatus={item.riskStatus!}
                 icon={item.icon}
                 balance={item.balance!}

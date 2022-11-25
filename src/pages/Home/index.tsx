@@ -1,7 +1,6 @@
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import MainLayout from "../../Layouts/MainLayout";
 import BackgroundBitcoin from "../../common/assets/images/background_bitcoin.png";
-import Box from "@mui/material/Box";
 import ConnectWallet from "../../components/Home/ConnectWallet";
 import ConnectWalletBg from "../../common/assets/images/connet_wallet_bg.png";
 

@@ -17,6 +17,7 @@ export interface ICoinsList {
   riskStatus?: string;
 }
 
+// selected coins list
 export const allCoinsList = [
   {
     id: "ethereum_usd",

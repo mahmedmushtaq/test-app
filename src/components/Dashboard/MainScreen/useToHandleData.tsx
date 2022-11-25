@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import fetchBalance from "../../../common/api/dashboard";
-import { allCoinsList, ICoinsList } from "../../../common/store";
+import { allCoinsList, ICoinsList } from "../../../common/store/dashboard";
 
 const coinSymbol = (symbol: string) => {
   if (symbol === "eth") return "WETH";
@@ -8,8 +8,23 @@ const coinSymbol = (symbol: string) => {
   return symbol.toUpperCase();
 };
 
-const useToFetchCoinsList = () => {
+const calculateValue = (value: string, symbol: string) => {
+  let multiplyNumber = 1;
+
+  if (symbol === "eth") multiplyNumber = 0.000835;
+  else if (symbol === "1inch") multiplyNumber = 1 / 0.52;
+
+  return `${Number(
+    Number(value) * multiplyNumber // convert usd value to usd+
+  ).toFixed(2)} ${coinSymbol(symbol)}`;
+};
+
+const useToHandleData = () => {
   const [coinsList, setCoinsList] = useState<ICoinsList[]>(allCoinsList);
+  const [open, setOpen] = useState(false);
+
+  const setClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
   const loadPoolBalance = useCallback(async () => {
     try {
@@ -18,13 +33,10 @@ const useToFetchCoinsList = () => {
       const coinsBalance: { [key: string]: string } = {};
 
       data.map((item) => {
-        coinsBalance[item.id] = `${Number(
-          Number(item.market_cap) * 0.000835
-        ).toFixed(2)} ${coinSymbol(item.symbol)}`;
+        coinsBalance[item.id] = calculateValue(item.market_cap, item.symbol);
       });
 
-      const allCoinsList = [...coinsList];
-      const finalCoinsList = allCoinsList.map((item) => {
+      const finalCoinsList = [...coinsList].map((item) => {
         // we are showing two coins  in a single row, so we need to show there value according to it also
         const coinsIdSplit = item.id.split("_");
 
@@ -46,7 +58,7 @@ const useToFetchCoinsList = () => {
     loadPoolBalance();
   }, [loadPoolBalance]);
 
-  return { coinsList };
+  return { coinsList, open, setClose, handleOpen };
 };
 
-export default useToFetchCoinsList;
+export default useToHandleData;

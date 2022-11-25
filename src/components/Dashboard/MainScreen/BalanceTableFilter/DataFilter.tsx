@@ -1,10 +1,8 @@
-import React from "react";
+import { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import Menu, { MenuProps } from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import EditIcon from "@mui/icons-material/Edit";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -64,17 +62,19 @@ const dataCountFilter = [
   { value: -2, children: <ChevronRightIcon /> },
 ];
 
+const dataMenus = [13, 14, 15];
+
 const DataFilter = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [alignment, setAlignment] = React.useState<string | null>("1");
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [pageCount, setPageCount] = useState<string | number>(1);
   const open = Boolean(anchorEl);
 
-  const handleAlignment = (
+  const onChangePageCount = (
     event: React.MouseEvent<HTMLElement>,
-    newAlignment: string | null
+    newAlignment: string | number
   ) => {
     if (parseInt(String(newAlignment)) <= 0) return;
-    setAlignment(newAlignment);
+    setPageCount(newAlignment);
   };
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -122,21 +122,18 @@ const DataFilter = () => {
           open={open}
           onClose={handleClose}
         >
-          <MenuItem onClick={handleClose} disableRipple>
-            <EditIcon />
-            Edit
-          </MenuItem>
-          <MenuItem onClick={handleClose} disableRipple>
-            <FileCopyIcon />
-            Duplicate
-          </MenuItem>
+          {dataMenus.map((menu) => (
+            <MenuItem key={menu} onClick={handleClose} disableRipple>
+              {menu}
+            </MenuItem>
+          ))}
         </StyledMenu>
       </Box>
       <Box sx={{ position: "fixed", right: 20, bottom: 10 }}>
         <ToggleButtonGroup
-          value={alignment}
+          value={pageCount}
           exclusive
-          onChange={handleAlignment}
+          onChange={onChangePageCount}
           sx={{
             height: 32,
             py: 1,
@@ -153,8 +150,8 @@ const DataFilter = () => {
           {dataCountFilter.map((item) => (
             <ToggleButton
               style={{
-                background: alignment === item.value ? "#1D7DEA" : undefined,
-                color: alignment === item.value ? "white" : "black",
+                background: pageCount === item.value ? "#1D7DEA" : undefined,
+                color: pageCount === item.value ? "white" : "black",
               }}
               key={item.value}
               value={item.value}
